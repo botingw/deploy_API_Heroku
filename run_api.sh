@@ -11,5 +11,8 @@ docker build --tag=flask_state_farm_model .
 docker images
 
 # Step 3: 
-# Run flask app
-docker run -it -p 8000:81 flask_state_farm_model
+# Run flask app, port rule: -p ex-container-port:container-port
+#docker run -it -p 8080:8080 flask_state_farm_model
+
+# do not try to control ports
+docker run -it -p 5000:5000 flask_state_farm_model

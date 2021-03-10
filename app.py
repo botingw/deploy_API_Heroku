@@ -1,14 +1,14 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[ ]:
+# In[13]:
 
 
 #!/usr/bin/env python
 # coding: utf-8
 
 # In[2]:
-
+import os
 
 import numpy as np
 from flask import Flask, request, jsonify, render_template
@@ -31,8 +31,8 @@ import traceback
 import numpy as np
 import pandas as pd
 import sys
-from sklearn.impute import SimpleImputer
-from sklearn.preprocessing import StandardScaler
+#from sklearn.impute import SimpleImputer
+#from sklearn.preprocessing import StandardScaler
 
 
 
@@ -40,6 +40,14 @@ from sklearn.preprocessing import StandardScaler
 model2 = True # should read from model file 
 
 app = Flask(__name__)
+
+@app.route('/')
+def hello_world():
+    return 'Flask Dockerized and deployed to Heroku'
+
+@app.route('/dir_test')
+def hello_world_dir_test():
+    return 'Flask Dockerized and deployed to Heroku, sub directory'
 
 @app.route('/predict', methods=['POST']) # Create http://host:port/predict POST end point
 
@@ -63,7 +71,9 @@ def predict():
     
 if __name__ == "__main__":
     #app.run(debug=True)
-    app.run(host='0.0.0.0', port=81, debug=False)
+    #app.run(host='0.0.0.0', port=80, debug=False)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port, debug=True)
 
 
 
